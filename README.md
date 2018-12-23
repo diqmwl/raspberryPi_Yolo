@@ -67,3 +67,48 @@ darknet 폴더 내부에서 make를 수행합니다.
 	[ubuntu ~]$ sudo nano image.c
 	```
 
+draw_detections_v3함수를 수정합니다. (flag 는 위에 선언했습니다.)
+void draw_detections_v3(image im, detection *dets, int num, float thresh, char **names, image **alphabet, int classes, int ext_output)
+{
+    FILE *f = fopen("/home/pi/people.txt","w");
+    fprintf(f,"0");
+    fclose(f);
+
+    int selected_detections_num;
+    detection_with_class* selected_detections = get_actual_detections(dets, num, thresh, &selected_detections_num);
+
+    // text output
+    qsort(selected_detections, selected_detections_num, sizeof(*selected_detections), compare_by_lefts);
+    int i;
+    for (i = 0; i < selected_detections_num; ++i) {
+        const int best_class = selected_detections[i].best_class;
+        if(!strcmp(names[best_class],"person")){flag = flag + 1; }
+        if(i == (selected_detections_num)-1){
+            FILE *f = fopen("/home/pi/people.txt","w");
+            fprintf(f,"%d",flag);
+            fclose(f);
+            printf("last!!");
+        }
+        printf("%s: %.0f%% %d ", names[best_class],    selected_detections[i].det.prob[best_class] * 100,flag);
+        if (ext_output){
+            printf("\t(leftAA_x: %4.0f   top_y: %4.0f   width: %4.0f   height: %4.0f)\n",
+                (selected_detections[i].det.bbox.x - selected_detections[i].det.bbox.w / 2)*im.w,
+                (selected_detections[i].det.bbox.y - selected_detections[i].det.bbox.h / 2)*im.h,
+                selected_detections[i].det.bbox.w*im.w, selected_detections[i].det.bbox.h*im.h);}
+        else{
+            printf("\n");}
+        int j;
+        for (j = 0; j < classes; ++j) {
+            if (selected_detections[i].det.prob[j] > thresh && j != best_class) {
+                printf("%s: %.0f%%\n", names[j], selected_detections[i].det.prob[j] * 100);
+            }
+        }
+    }
+
+   ....
+}
+
+이제 이미지에 사람이 검색될경우 person.txt파일에 명수가 등록되게 됩니다.
+	```
+	[ubuntu ~]$ ./darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/person.jpg
+	```
