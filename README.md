@@ -71,12 +71,15 @@ draw_detections_v3함수를 수정합니다. (flag 는 위에 선언했습니다
 
 
 void draw_detections_v3(image im, detection *dets, int num, float thresh, char **names, image **alphabet, int classes, int ext_output)
+
 {
     FILE *f = fopen("/home/pi/people.txt","w");
     fprintf(f,"0");
     fclose(f);
+   
     int selected_detections_num;
     detection_with_class* selected_detections = get_actual_detections(dets, num, thresh, &selected_detections_num);
+    
     // text output
     qsort(selected_detections, selected_detections_num, sizeof(*selected_detections), compare_by_lefts);
     int i;
