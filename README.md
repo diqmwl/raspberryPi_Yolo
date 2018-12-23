@@ -33,6 +33,8 @@ Yolo를 이용한 PeopleCounting
 	[ubuntu ~]$ sudo nano Makefile
 	```
 OPENCV = 0 -> OPENCV = 1 로 수정합니다.
+
+
 ![image1](./doc/image1.JPG)
 
 4. build makefile
