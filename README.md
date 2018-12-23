@@ -57,3 +57,13 @@ darknet 폴더 내부에서 make를 수행합니다.
 	```
 	
 #### 4) Yolo Image.c파일 수정 (예제가 실행되었을경우 진행합니다.)
+1. image.c파일 수정
+
+	```
+	[ubuntu ~]$ cd src
+	```
+	
+	```
+	[ubuntu ~]$ sudo nano image.c
+	```
+
