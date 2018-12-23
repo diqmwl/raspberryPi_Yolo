@@ -32,3 +32,12 @@ Yolo를 이용한 PeopleCounting
 	```
 	[ubuntu ~]$ sudo nano Makefile
 	```
+OPENCV = 0 -> OPENCV = 1 로 수정합니다.
+![image1](./doc/image1.JPG)
+
+4. build makefile
+
+	```
+	[ubuntu ~]$ make
+	```
+darknet 폴더 내부에서 make를 수행합니다.
