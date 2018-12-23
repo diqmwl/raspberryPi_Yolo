@@ -43,3 +43,17 @@ OPENCV = 0 -> OPENCV = 1 로 수정합니다.
 	[ubuntu ~]$ make
 	```
 darknet 폴더 내부에서 make를 수행합니다.
+
+5. 가중치 파일 설치
+
+	```
+	[ubuntu ~]$ wget https://pjreddie.com/media/files/yolov3-tiny.weights
+	```
+	
+6. 이미지파일 예제 실행
+
+	```
+	[ubuntu ~]$ ./darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg
+	```
+	
+#### 4) Yolo Image.c파일 수정 (예제가 실행되었을경우 진행합니다.)
