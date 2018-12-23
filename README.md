@@ -108,7 +108,9 @@ void draw_detections_v3(image im, detection *dets, int num, float thresh, char *
    ....
 }
 
-이제 이미지에 사람이 검색될경우 person.txt파일에 명수가 등록되게 됩니다.
+이제 이미지에 사람이 검색될경우 person.txt파일에 몇명인지 기록되게 됩니다.
+	
+	
 	```
 	[ubuntu ~]$ ./darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/person.jpg
 	```
